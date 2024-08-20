@@ -207,17 +207,22 @@
             .col-3 {
                 flex: 1 1 100%;
             }
-           .photo-containers{
+        }
+
+        .photo-containers{
+            display:grid;
+
             text-align: center;
+            background-color: #eeeeee;
+            height: auto;
+            grid-template-columns: 1fr 1fr 1fr;
+            
          }
-         .photo {
-            display: inline-block;
+         
+        .photo {
             margin: 0 10px; /* Ajoute de l'espace entre les images */
             vertical-align: middle; /* Aligne les images verticalement si elles ont des hauteurs différentes */
             width: 200px; /* Exemple de largeur fixe pour chaque image */
             height: auto; /* Pour conserver les proportions de l'image */
-          }
+        }
 
-    .
-   
-    
