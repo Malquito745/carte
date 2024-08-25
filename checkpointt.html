@@ -1,0 +1,196 @@
+<html>
+  <head>
+    <title>Shopping Card</title>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="totale"><p id="totalp">Shopping Bag total : $0</p></div>
+
+      <div class="row">
+        <i class="fas fa-trash-alt"></i> <i class="fas fa-heart"></i>
+        <img
+          src="https://www.jennyfer.com/on/demandware.static/-/Sites/default/dw69195d58/visuel-pants/pantalon-cargo.jpg"
+        />
+        <p><span>Pantalon</span></p>
+        <i class="fas fa-plus-square add"></i>
+        <p class="qte">0</p>
+        <i class="fas fa-minus-square minus"></i>
+        <p>$<span class="price">549</span></p>
+      </div>
+
+      <div class="row">
+        <i class="fas fa-trash-alt"></i>
+        <i class="fas fa-heart"></i>
+        <img
+          src="https://i.pinimg.com/originals/a2/dd/90/a2dd901fdcc7102700ab2bf2543590b9.jpg"
+        />
+        <p>
+          <span
+            >Basket <br />
+            Homme</span
+          >
+        </p>
+        <i class="fas fa-plus-square add"></i>
+        <p class="qte">0</p>
+        <i class="fas fa-minus-square minus"></i>
+        <p>$<span class="price">290</span></p>
+      </div>
+
+      <div class="lastrow">
+        <i class="fas fa-trash-alt"></i> <i class="fas fa-heart"></i>
+        <img
+          src="https://i.pinimg.com/236x/a7/c0/17/a7c017fc393a697993ce304337641a32--cache-cou-bonnets.jpg"
+        />
+        <p><span>Echarpe</span></p>
+        <i class="fas fa-plus-square add"></i>
+        <p class="qte">0</p>
+        <i class="fas fa-minus-square minus"></i>
+        <p>$<span class="price">349</span></p>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
+<style>
+    body {
+  min-height: 90vh;
+  background-image: url("https://wallpaperaccess.com/full/2483946.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #7a90a9;
+}
+.container {
+  width: 60%;
+  height: 450px;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  opacity: 0.9;
+  border-radius: 7px;
+}
+.totale {
+  border-bottom: 1px solid #d2d4d6;
+}
+.totale p {
+  margin-left: 30px;
+  font-size: 18px;
+  color: #4a4b4c;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 15px;
+}
+.fas {
+  color: #aab8c2 ;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 50px;
+  margin-top: 15px;
+  border-bottom: 1px solid #d2d4d6;
+}
+
+.lastrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 50px;
+  margin-top: 15px;
+}
+span {
+  color: #4a4b4c;
+}
+
+.price {
+  color: #7a90a9;
+}
+
+.fa-heart {
+  color: grey;
+}
+
+.red {
+  color: red;
+}
+</style>
+
+<script>
+    // Sélection de tous les éléments nécessaires
+const addButtons = document.querySelectorAll('.add');
+const minusButtons = document.querySelectorAll('.minus');
+const deleteButtons = document.querySelectorAll('.fa-trash-alt');
+const heartButtons = document.querySelectorAll('.fa-heart');
+const totalPriceElement = document.getElementById('totalp');
+const rows = document.querySelectorAll('.row, .lastrow');
+
+// Fonction pour mettre à jour le prix total
+function updateTotal() {
+  let total = 0;
+  rows.forEach(row => {
+    const quantity = parseInt(row.querySelector('.qte').textContent);
+    const price = parseFloat(row.querySelector('.price').textContent);
+    total += quantity * price;
+  });
+  totalPriceElement.textContent = `Shopping Bag total : $${total.toFixed(2)}`;
+}
+
+// Ajout de la fonctionnalité "+" pour augmenter la quantité
+addButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    const quantityElement = this.nextElementSibling;
+    let quantity = parseInt(quantityElement.textContent);
+    quantity++;
+    quantityElement.textContent = quantity;
+    updateTotal();
+  });
+});
+
+
+minusButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    const quantityElement = this.previousElementSibling;
+    let quantity = parseInt(quantityElement.textContent);
+    if (quantity > 0) {
+      quantity--;
+      quantityElement.textContent = quantity;
+      updateTotal();
+    }
+  });
+});
+
+
+deleteButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    const row = this.closest('.row, .lastrow');
+    row.remove();
+    updateTotal();
+  });
+});
+
+
+heartButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    this.classList.toggle('red');
+  });
+});
+
+
+updateTotal();
+
+</script>
